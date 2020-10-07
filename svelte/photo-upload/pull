@@ -1,0 +1,22 @@
+#!/bin/zsh
+
+error () {
+  echo "$1" >& 2
+  echo "USAGE: pull <public_hugo_path_to_index_file>"
+  echo "EXMPL: pull email"
+  exit 1
+}
+
+if [[ "$1" == "-h" ]] || [[ "$1" == "--help" ]]; then
+  error "Printing usage"
+fi
+
+if [[ "$#" -lt 1 ]]; then
+  error "You must enter an index file path argument"
+fi
+
+site="../../"
+
+# setup index file for use in svelte
+cp "${site}/public/${1}/index.html" public/
+sed -i '' 's|</head>|<link rel="stylesheet" href="build/bundle.css"><script src="build/bundle.js" defer></script></head>|g' public/index.html

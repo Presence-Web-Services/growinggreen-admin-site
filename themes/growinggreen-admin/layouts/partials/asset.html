@@ -1,0 +1,13 @@
+{{ if .file }}
+  {{ $asset := resources.Get .file }}
+  {{ if hugo.IsProduction }}
+    {{ $asset = $asset | resources.Minify | resources.Fingerprint }}
+  {{ end }}
+  {{ if hasPrefix .file "/css/" }}
+    <link rel="stylesheet" href="{{ $asset.RelPermalink }}" {{ if hugo.IsProduction }}integrity="{{ $asset.Data.Integrity }}"{{ end }}>
+  {{ else if hasPrefix .file "/js/" }}
+    <script src="{{ $asset.RelPermalink }}" {{ if hugo.IsProduction }}integrity="{{ $asset.Data.Integrity }}"{{ end }} defer></script>
+  {{ else if hasPrefix .file "/manifest"}}
+    <link rel="manifest" href="{{ $asset.RelPermalink }}" crossorigin="use-credentials" {{ if hugo.IsProduction }}integrity="{{ $asset.Data.Integrity }}"{{ end }}>
+  {{ end }}
+{{ end }}

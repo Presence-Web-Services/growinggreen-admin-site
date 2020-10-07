@@ -1,0 +1,8 @@
+{{ define "head" }}
+  {{ partial "asset.html" (dict "file" .Params.css) }}
+  {{ partial "asset.html" (dict "file" .Params.js) }}
+{{ end }}
+
+{{ define "main" }}
+  {{ .Content }}
+{{ end }}

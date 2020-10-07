@@ -1,0 +1,20 @@
+#!/bin/zsh
+
+site=$(pwd)
+dirname='photo-upload'
+svelte="svelte/${dirname}"
+
+# build hugo site
+rm -rf public
+hugo --minify
+
+cd $svelte
+./pull $dirname
+npm run build
+cd $site
+
+#copy svelte build bundle and index
+cp -r "${svelte}/public/" "public/${dirname}"
+
+#dockerize
+./dockerize

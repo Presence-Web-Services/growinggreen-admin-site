@@ -1,0 +1,6 @@
+#!/bin/zsh
+
+container_id=$(docker ps --filter "ancestor=growinggreen-admin" | awk 'FNR == 2 {print $1}')
+docker rm -f $container_id
+docker build -t growinggreen-admin .
+docker run -p 80:80 -d growinggreen-admin

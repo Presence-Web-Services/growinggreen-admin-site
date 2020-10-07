@@ -1,0 +1,12 @@
+{{ define "head" }}
+  {{ partial "asset.html" (dict "file" "/css/index.css") }}
+{{ end }}
+
+{{ define "main" }}
+  <h1>Administrator links</h1>
+  <div id="links">
+    {{ range .Site.RegularPages }}
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+    {{ end }}
+  </div>
+{{ end }}

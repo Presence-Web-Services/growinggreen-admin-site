@@ -1,0 +1,10 @@
+{{ $cssBundle := slice }}
+{{ range .cssFiles }}
+  {{ $asset := resources.Get . }}
+  {{ $cssBundle = $cssBundle | append $asset }}
+{{ end }}
+{{ $cssBundle = $cssBundle | resources.Concat .bundleFile }}
+{{ if hugo.IsProduction }}
+  {{ $cssBundle = $cssBundle | resources.Minify | resources.Fingerprint }}
+{{ end }}
+<link rel="stylesheet" href="{{ $cssBundle.RelPermalink }}" {{ if hugo.IsProduction }}integrity="{{ $cssBundle.Data.Integrity }}"{{ end }}>

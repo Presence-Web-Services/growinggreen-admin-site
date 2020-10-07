@@ -1,0 +1,160 @@
+/* fluid typography */
+html {
+  width: 100vw; /* fix for safari font-size */
+  font-size: 1em;
+  font-family: 'Quattrocento', serif;
+  line-height: 1.5;
+}
+@media (min-width: 20rem) {
+  html {
+    font-size: calc(1em + 0.2 * ((100vw - 20em) / 55));
+  }
+}
+@media (min-width: 75rem) {
+  html {
+    font-size: 1.2em;
+  }
+}
+/* global */
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+h1, h2 {
+  font-family: 'Oswald', sans-serif;
+  margin: 0;
+}
+h1 {
+  font-size: 1.4em;
+}
+h2 {
+  font-size: 1.2em;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+ul li {
+  list-style: none;
+}
+img.pop_out {
+  height: 0.8em;
+  margin-left: 0.5em;
+}
+#skip_link {
+  position: absolute;
+  right: 0;
+  top: -1.7em;
+  background-color: #f2f8d6;
+  border-radius: 3%/15%;
+  padding: 0.1em;
+  z-index: 20;
+  transition: top 0.5s ease;
+}
+#skip_link:focus {
+  top: 0;
+}
+/* header */
+header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background-color: #88b06a;
+  filter: drop-shadow(0 0.2em 0.4em #000);
+  z-index: 10;
+  padding: 0.1em;
+}
+header > a {
+  display: contents;
+}
+header img {
+  flex: 0 1 auto;
+  width: 2.5em;
+  margin-right: 0.5em;
+  margin-left: 0.9em;
+}
+header hgroup {
+  flex: 0 0 auto;
+  line-height: 1;
+}
+header hgroup h2 {
+  padding-left: 0.64em;
+  margin-bottom: 0.2em;
+}
+header nav, header nav ul {
+  display: contents;
+}
+header nav ul li {
+  align-self: flex-end;
+}
+header nav ul li:first-child {
+  margin-left: auto;
+}
+header a, header a:visited, header a:active {
+  color: black;
+  text-decoration: none;
+}
+/* main */
+main {
+  flex: 1 0 auto;
+  margin-top: 3em;
+  height: max-content;
+}
+main h1 {
+  color: #4b7928;
+}
+main h2 {
+  color: #3b6918;
+  min-width: 6em;
+  border-bottom: 0.2em double black;
+}
+main h1, main h2 {
+  text-align: center;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+main h1 a, main h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+main p {
+  min-width: 18em;
+  max-width: 33em;
+}
+main button {
+  font-size: 1em;
+  font-family: 'Quattrocento', serif;
+  color: white;
+  padding: 0;
+  background-color: #4b7928;
+}
+main button:hover, main button:focus {
+  background-color: #6b9948;
+}
+main button:active {
+  background-color: #2b5908;
+}
+/* footer */
+footer {
+  flex: 0 0 auto;
+  padding: 1em;
+  text-align: center;
+  background-color: #f2f8d6;
+}
+footer > a {
+  display: inline-block;
+  height: 2em;
+  width: 8.8em;
+}
+footer > a img:first-child {
+  height: 100%;
+  max-width: calc(100% - 1.3em);
+}
+footer p {
+  margin: 0;
+}

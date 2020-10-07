@@ -1,0 +1,11 @@
+{
+  "name": "Growing Green Tree Care & Landscaping",
+  "short_name": "Growing Green",
+  "icons": [{
+      "src": "google-touch-icon.png",
+      "sizes": "512x512"
+  }],
+  "background_color": "#ffffff",
+  "theme_color": "#88b06a",
+  "display": "fullscreen"
+}

@@ -1,0 +1,11 @@
+{{ define "head" }}
+  {{ partial "asset.html" (dict "file" "/css/404.css") }}
+{{ end }}
+
+{{ define "main" }}
+  <article id="error_404">
+    <h1>404 not found</h1>
+    <p>You have entered a website address that does not exist.</p>
+    <p>Please visit our <a href="/">home webpage</a> for all your tree care needs.</p>
+  </article>
+{{ end }}

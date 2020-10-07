@@ -1,0 +1,9 @@
+baseURL = "http://admin.growinggreentrees.net/"
+languageCode = "en-us"
+title = "Home"
+theme = "growinggreen-admin"
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "taxonomyTerm"]
+[params]
+  author = "Presence Web Services"
+  description = "Admin site for uploading photos for the photo gallery."

@@ -1,0 +1,25 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="{{ .Site.Params.Author }}">
+
+<meta name="robots" content="noindex, nofollow, noarchive">
+
+<meta name="description" content="{{ .Description | default .Site.Params.Description }}">
+<title>{{ if .Title }}{{ .Title }} - {{ end }}Growing Green Tree Care & Landscaping</title>
+
+<meta name="theme-color" content="#88b06a">
+<link rel="icon" href="/icons/logo.svg">
+<link rel="mask-icon" href="/icons/mask-icon.svg" color="#000">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+{{ partial "asset.html" (dict "file" "/manifest.json") }}
+
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+{{ $oswaldFont := "family=Oswald:wght@700" }}
+{{ $quattrocentoFont := "family=Quattrocento" }}
+{{ $font := printf "%s&%s" $oswaldFont $quattrocentoFont }}
+{{ $fontLink := printf "https://fonts.googleapis.com/css2?%s&display=swap" $font }}
+<link rel="preload" href="{{ $fontLink }}" as="style" type="text/css">
+
+{{ partial "asset.html" (dict "file" "/css/style.css") }}
+
+<link href="{{ $fontLink }}" rel="stylesheet">
