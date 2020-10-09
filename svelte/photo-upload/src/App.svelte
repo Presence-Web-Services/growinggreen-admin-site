@@ -75,7 +75,7 @@ function checkPassphrase() {
 
 function checkPhotos() {
   if (photos.length === 0) {
-    photosError = 'Error: Please select photos to upload.';
+    photosError = 'Error: Please select photo(s) to upload.';
     return;
   }
 }
@@ -161,7 +161,7 @@ function upload() {
   <p aria-live="polite" class="success">{responseSuccess}</p>
 {/if}
 {#if sending}
-  <p aria-live="polite">Please wait while the photos are being optimized and uploaded.</p>
+  <p aria-live="polite">Please wait while the photo(s) are being optimized and uploaded.</p>
 {/if}
 
 
