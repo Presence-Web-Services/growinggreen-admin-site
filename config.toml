@@ -1,6 +1,6 @@
 baseURL = "http://admin.growinggreentrees.net/"
 languageCode = "en-us"
-title = "Home"
+title = "Admin"
 theme = "growinggreen-admin"
 enableRobotsTXT = true
 disableKinds = ["taxonomy", "taxonomyTerm"]
