@@ -161,7 +161,7 @@ function upload() {
   <p aria-live="polite" class="success">{responseSuccess}</p>
 {/if}
 {#if sending}
-  <p aria-live="polite">Please wait while the photo(s) are being optimized and uploaded.</p>
+  <p aria-live="polite">Please wait while the photo(s) are being uploaded.</p>
 {/if}
 
 
