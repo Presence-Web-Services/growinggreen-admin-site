@@ -85,34 +85,72 @@ function clearFields() {
   photos = [];
 }
 
-function sendData() {
-  const xhr = new XMLHttpRequest();
-  const formData = new FormData();
-  formData.append('title', title);
-  formData.append('passphrase', passphrase);
-  for (let photo of photos) {
-    delete photo.src;
-  }
-  formData.append('numPhotos', photos.length)
+function uploadPhotos() {
+  let promises = [];
+  const now = new Date();
+  const dateString = `${now.getFullYear()}_${now.getMonth()+1}_${now.getDate()}_${now.getHours()}_${now.getMinutes()}_${now.getSeconds()}`;
   for (let i = 0; i < photos.length; i++) {
-    formData.append('photo'+i, photos[i]['photo'])
-    formData.append('caption'+i, photos[i]['caption'])
+    delete photos[i].src;
+    promises.push(uploadPhoto(i, dateString));
   }
-  xhr.addEventListener('load', (event) => {
-    if (event.target.status != 200) {
-      responseError = event.target.responseText.trim();
-    } else {
-      responseSuccess = event.target.responseText.trim();
-      clearFields();
+  promises.push(sendEmail(dateString));
+  Promise.all(promises).then(() => {
+    responseSuccess = 'Photo(s) successfully uploaded.';
+    clearFields();
+    sending = false;
+  }).catch(error => {
+    responseError = error;
+    sending = false;
+  });
+}
+
+function uploadPhoto(index, dateString) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('passphrase', passphrase);
+    formData.append('index', index);
+    formData.append('date', dateString);
+    formData.append('photo', photos[index]['photo']);
+    xhr.addEventListener('load', (event) => {
+      if (event.target.status == 200) {
+        resolve(event.target.responseText.trim());
+      } else {
+        reject(event.target.responseText.trim());
+      }
+    });
+    xhr.addEventListener('error', (event) => {
+      reject('Error: No response from server.');
+    });
+    xhr.open('POST', '/upload/');
+    xhr.send(formData);
+  });
+}
+
+function sendEmail(dateString) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('passphrase', passphrase);
+    formData.append('date', dateString);
+    formData.append('numPhotos', photos.length);
+    for (let i = 0; i < photos.length; i++) {
+      formData.append('caption'+i, photos[i]['caption'])
     }
-    sending = false;
+    xhr.addEventListener('load', (event) => {
+      if (event.target.status == 200) {
+        resolve(event.target.responseText.trim());
+      } else {
+        reject(event.target.responseText.trim());
+      }
+    });
+    xhr.addEventListener('error', (event) => {
+      reject('Error: No response from server.');
+    });
+    xhr.open('POST', '/email/');
+    xhr.send(formData);
   });
-  xhr.addEventListener('error', (event) => {
-    responseError = 'Error: No response from server.'
-    sending = false;
-  });
-  xhr.open('POST', '/upload/');
-  xhr.send(formData);
 }
 
 function upload() {
@@ -125,7 +163,7 @@ function upload() {
     sending = false;
     return;
   }
-  sendData();
+  uploadPhotos();
 }
 </script>
 
